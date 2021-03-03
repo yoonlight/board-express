@@ -8,6 +8,8 @@
 
 1. DB: mongoose
 
+1. Auth: passport.js
+
 ## Function
 
 1. Board CRUD
