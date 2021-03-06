@@ -23,7 +23,7 @@ yarn init
 yarn add express morgan express-session cookie-parser body-parser method-override
 yarn add dotenv
 yarn add mongoose
-yarn add passport passport-jwt bcryptjs jsonwebtoken
+yarn add passport passport-jwt bcryptjs jsonwebtoken passport-local passport-local-mongoose
 yarn add -D eslint eslint-config-prettier eslint-plugin-prettier prettier
 node_modules/.bin/eslint --init
 ```

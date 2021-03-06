@@ -1,11 +1,19 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import expressConfig from './lib/express'
+import passport from 'passport'
+import { expressCfg, mongooseCfg, passportCfg } from './lib'
 import router from './router'
+
 dotenv.config()
+const port = process.env.PORT
 const app = express()
-expressConfig(app)
+mongooseCfg()
+expressCfg(app)
+app.use(passport.initialize())
+app.use(passport.session())
 app.use('/', router)
-app.listen(process.env.PORT, () => {
-  console.log('board server listen to', process.env.PORT)
+app.listen(port, () => {
+  console.log('board server listen to', port)
 })
+
+passportCfg(passport)
