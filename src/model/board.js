@@ -9,7 +9,7 @@ const boardSchema = new Schema({
   secret: { type: Boolean, default: false },
   comments: [
     {
-      id: Number,
+      seq: Number,
       usernmae: String,
       body: String,
       secret: { type: Boolean, default: false },
@@ -17,7 +17,7 @@ const boardSchema = new Schema({
       date: { type: Date, default: Date.now },
     },
   ],
-  id: Number,
+  seq: Number,
   tags: [String],
   category: String,
   like: Number,

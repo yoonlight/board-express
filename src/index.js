@@ -11,7 +11,7 @@ mongooseCfg()
 expressCfg(app)
 app.use(passport.initialize())
 app.use(passport.session())
-app.use('/', router)
+app.use('/api', router)
 app.listen(port, () => {
   console.log('board server listen to', port)
 })
