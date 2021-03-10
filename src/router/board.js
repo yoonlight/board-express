@@ -83,12 +83,11 @@ const addComment = async (req, res) => {
     })
 }
 
-// update 예정
 const updateComment = async (req, res) => {
   await board
     .updateOne(
-      { 'comments._id': req.params.commentId },
-      { $set: { 'comments.$[]': req.body } }
+      { _id: req.params.id, 'comments._id': req.params.commentId },
+      { $set: { 'comments.$.body': req.body.body } }
     )
     .exec((err, result) => {
       if (err) res.send(err)

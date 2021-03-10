@@ -11,7 +11,7 @@ const boardSchema = new Schema({
   comments: [
     {
       seq: Number,
-      usernmae: String,
+      username: String,
       body: String,
       secret: { type: Boolean, default: false },
       secretName: { type: Boolean, default: false },
