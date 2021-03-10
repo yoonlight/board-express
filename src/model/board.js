@@ -6,6 +6,7 @@ const boardSchema = new Schema({
   username: String,
   body: String,
   date: { type: Date, default: Date.now },
+  updateDate: { type: Date, default: Date.now },
   secret: { type: Boolean, default: false },
   comments: [
     {
@@ -20,8 +21,8 @@ const boardSchema = new Schema({
   seq: Number,
   tags: [String],
   category: String,
-  like: Number,
-  view: Number,
+  like: { type: Number, default: 0 },
+  view: { type: Number, default: 0 },
 })
 
 const board = mongoose.model('Board', boardSchema)
