@@ -2,10 +2,16 @@ import { Router } from 'express'
 import { board } from '../model'
 
 const router = Router()
-const list = async (req, res) => {
-  const { offset, limit, complete, search, field } = req.query
+const pagination = (query) => {
+  const { offset, limit } = query
   const perPage = parseInt(limit)
   const pageNum = (parseInt(offset) - 1) * perPage
+  return { perPage, pageNum }
+}
+
+const list = async (req, res) => {
+  const { complete, search, field } = req.query
+  const { perPage, pageNum } = pagination(req.query)
   let result = board.find().sort({ date: -1 }).skip(pageNum).limit(perPage)
   let count = board.countDocuments()
 
@@ -25,11 +31,11 @@ const list = async (req, res) => {
 
   try {
     const pageCount = await count.exec()
-    const page = Math.ceil(pageCount / perPage)
+    const pageTotal = Math.ceil(pageCount / perPage)
     await result.exec((err, result) => {
       if (err) res.status(400).send(err)
       if (result == []) res.status(404)
-      res.json({ pagination: { pageCount, page }, query: result })
+      res.json({ pagination: { pageCount, pageTotal }, query: result })
     })
   } catch (error) {
     res.json(error)

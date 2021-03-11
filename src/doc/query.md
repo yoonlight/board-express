@@ -7,7 +7,6 @@
   "title": "String",
   "username": "String",
   "body": "String",
-  "seq": "Number",
   "tags": ["String"],
   "category": "String"
 }

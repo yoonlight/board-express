@@ -42,7 +42,6 @@ router.post(
     failureFlash: true,
   }),
   async (req, res, next) => {
-    // if (err || !user) return res.status(400).end();
     req.login(user, { session: false }, (error) => {
       if (error) next(error)
       const token = jwt.sign(
@@ -58,6 +57,7 @@ router.post(
     })
   }
 )
+
 router.get(
   '/a',
   passport.authenticate('jwt', { session: false }),
@@ -65,6 +65,7 @@ router.get(
     res.send()
   }
 )
+
 router.post(
   '/profile',
   passport.authenticate('jwt', { session: false }),
