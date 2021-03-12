@@ -12,17 +12,21 @@ router.get('/user', async (req, res) => {
   res.send(result)
 })
 
-router.get('/', async (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json('success')
-  } else {
-    res.status(404).json('failure')
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    if (req.isAuthenticated()) {
+      res.send('success')
+    } else {
+      res.status(404).json('failure')
+    }
   }
-})
+)
 
 router.post('/register', (req, res, next) => {
   user.register(
-    new user({ username: req.body.username }),
+    new user({ username: req.body.username, email: req.body.email }),
     req.body.password,
     (err) => {
       if (err) return next(err)
