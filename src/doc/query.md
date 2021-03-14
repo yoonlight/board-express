@@ -16,3 +16,5 @@
   "body": "String2"
 }
 ```
+
+localhost:3001/api/board?offset=1&limit=5

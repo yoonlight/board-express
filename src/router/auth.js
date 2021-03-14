@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { user } from '../model/index.js'
 import jwt from 'jsonwebtoken'
+import { user } from '../model'
+import { pagination } from '../lib/query'
 
 const router = Router()
 
 router.get('/user', async (req, res) => {
-  const perPage = parseInt(req.query.limit)
-  const pageNum = (parseInt(req.query.offset) - 1) * perPage
+  const { perPage, pageNum } = pagination(req.query)
   const result = await user.find().skip(pageNum).limit(perPage)
   res.send(result)
 })
