@@ -31,6 +31,7 @@ const detail = async (req, res) => {
 }
 
 const create = async (req, res) => {
+  req.body.username = req.user.username
   await board.create(req.body, (err) => {
     if (err) res.status(404).send(err)
   })
@@ -62,6 +63,7 @@ const deleteComment = async (req, res) => {
 }
 
 const addComment = async (req, res) => {
+  req.body.username = req.user.username
   await board
     .updateOne({ _id: req.params.id }, { $push: { comments: [req.body] } })
     .exec((err, result) => {

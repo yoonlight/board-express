@@ -24,25 +24,18 @@ router.post('/register', (req, res, next) => {
   )
 })
 
-router.get('/login', (req, res) => {
+router.get('/fail', (req, res) => {
   res.status(401).json({ message: 'login fail' })
 })
 
 router.post(
   '/login',
-  passport.authenticate('local', {
-    failureRedirect: 'login',
-  }),
-  async (req, res, next) => {
+  passport.authenticate('local', { failureRedirect: 'fail' }),
+  async (req, res) => {
     const option = { expiresIn: '5m' }
     const secretOrKey = process.env.SERVER_SECRET_KEY
-    const username = req.body.username
-    req.login(user, { session: false }, async (error) => {
-      if (error) next(error)
-      const info = await user.findOne().where('username').equals(username)
-      const token = jwt.sign({ uid: info._id }, secretOrKey, option)
-      return res.json({ message: 'success', token })
-    })
+    const token = jwt.sign({ uid: req.user._id }, secretOrKey, option)
+    res.json({ message: 'success', token })
   }
 )
 
