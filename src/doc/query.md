@@ -1,6 +1,6 @@
 # Query
 
-## create body
+## create board
 
 ```json
 {
@@ -10,11 +10,17 @@
   "tags": ["String"],
   "category": "String"
 }
+```
 
+## add comment
+
+```json
 {
-  "usernmae": "String",
+  "username": "String",
   "body": "String2"
 }
 ```
+
+## find all board
 
 localhost:3001/api/board?offset=1&limit=5
