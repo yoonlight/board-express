@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { board } from '../model'
 import { pagination, search } from '../lib/query'
+import passport from 'passport'
 
 const router = Router()
 
@@ -83,21 +84,22 @@ const updateComment = async (req, res) => {
       else res.send(result)
     })
 }
+const atuh = passport.authenticate('jwt', { session: false })
 
 router.get('/', list)
 
 router.get('/:id', detail)
 
-router.post('/', create)
+router.post('/', atuh, create)
 
-router.post('/:id/comments', addComment)
+router.post('/:id/comments', atuh, addComment)
 
-router.put('/:id', update)
+router.put('/:id', atuh, update)
 
-router.put('/:id/comments/:commentId', updateComment)
+router.put('/:id/comments/:commentId', atuh, updateComment)
 
-router.delete('/:id', deleteBoard)
+router.delete('/:id', atuh, deleteBoard)
 
-router.delete('/:id/comments/:commentId', deleteComment)
+router.delete('/:id/comments/:commentId', atuh, deleteComment)
 
 export default router
