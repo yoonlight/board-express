@@ -84,22 +84,22 @@ const updateComment = async (req, res) => {
       else res.send(result)
     })
 }
-const atuh = passport.authenticate('jwt', { session: false })
+const auth = passport.authenticate('jwt', { session: false })
 
 router.get('/', list)
 
 router.get('/:id', detail)
 
-router.post('/', atuh, create)
+router.post('/', auth, create)
 
-router.post('/:id/comments', atuh, addComment)
+router.post('/:id/comments', auth, addComment)
 
-router.put('/:id', atuh, update)
+router.put('/:id', auth, update)
 
-router.put('/:id/comments/:commentId', atuh, updateComment)
+router.put('/:id/comments/:commentId', auth, updateComment)
 
-router.delete('/:id', atuh, deleteBoard)
+router.delete('/:id', auth, deleteBoard)
 
-router.delete('/:id/comments/:commentId', atuh, deleteComment)
+router.delete('/:id/comments/:commentId', auth, deleteComment)
 
 export default router
